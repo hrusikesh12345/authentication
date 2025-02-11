@@ -44,8 +44,8 @@ const Signup = () => {
   };
 
   return (
-    <div className="card w-75 mx-auto mt-5 ">
-      <div className="card-head text-center rounded-top-1 p-3 text-light" style={{backgroundColor:'#172A3A'}}>
+    <div className="card w-75 mx-auto mt-5 shadow border-black border-1">
+      <div className="card-head text-center rounded-top-1  p-3 text-light" style={{backgroundColor:'#172A3A'}}>
         <h2>Sign Up</h2>
       </div>
       <div className="card-body p-4">

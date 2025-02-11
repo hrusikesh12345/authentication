@@ -38,8 +38,8 @@ const Login = () => {
   };
 
   return (
-    <div className="card w-75 mt-5 mx-auto border-black border-1">
-      <div className="card-head text-center p-3 rounded-1 text-light" style={{backgroundColor:'#172A3A'}}>
+    <div className="card w-75 mt-5 mx-auto border-black border-1 shadow">
+      <div className="card-head text-center p-3 rounded-top-1 text-light" style={{backgroundColor:'#172A3A'}}>
         <h2>Login</h2>
       </div>
       <div className="card-body p-4">
