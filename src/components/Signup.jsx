@@ -33,14 +33,14 @@ const Signup = () => {
         mobile,
         password,
       });
-  
+
       if (response.status === 200 || response.status === 201) {
         toast.success("Signup successful!");
         navigate("/login");
       }
     } catch (error) {
       console.error("Signup Error:", error);
-  
+
       if (error.response) {
         toast.error(error.response.data.message || "Signup failed!");
       } else {
@@ -51,10 +51,10 @@ const Signup = () => {
 
   return (
     <div className="card col-sm-9 col-lg-6 mx-auto mt-5 shadow border-black border-1">
-      <div className="card-head text-center rounded-top-1  p-3 text-light" style={{backgroundColor:'#172A3A'}}>
+      <div className="card-head text-center rounded-top-1 p-3 text-light" style={{ backgroundColor: '#172A3A' }}>
         <h2>Sign Up</h2>
       </div>
-      <div className="card-body p-4">
+      <div className="card-body p-4 mt-3">
         <Formik
           initialValues={{ email: "", mobile: "", password: "", confirmPassword: "" }}
           validationSchema={validationSchema}
@@ -62,53 +62,67 @@ const Signup = () => {
         >
           {({ touched, errors }) => (
             <Form>
-              <div className="text-danger mb-2">
-                <ErrorMessage name="email" component="div" className="error-message" />
-                <ErrorMessage name="mobile" component="div" className="error-message" />
-                <ErrorMessage name="password" component="div" className="error-message" />
-                <ErrorMessage name="confirmPassword" component="div" className="error-message" />
-              </div>
-
-              <div className="form-floating mb-3">
-                <Field 
-                  type="email" 
-                  name="email" 
-                  className={`form-control ${touched.email && errors.email ? 'is-invalid' : ''}`} 
-                  id="floatingInput" 
-                  placeholder="name@example.com" 
+              {touched.email && errors.email && (
+                  <div className="error-message-container">
+                    <div className="error-message">{errors.email}</div>
+                  </div>
+                )}
+              <div className="form-floating mb-4">
+                <Field
+                  type="email"
+                  name="email"
+                  className={`form-control ${touched.email && errors.email ? 'is-invalid' : ''}`}
+                  id="floatingInput"
+                  placeholder="name@example.com"
                 />
                 <label htmlFor="floatingInput">Email address</label>
+                
               </div>
-
-              <div className="form-floating mb-3">
-                <Field 
-                  type="text" 
-                  name="mobile" 
-                  className={`form-control ${touched.mobile && errors.mobile ? 'is-invalid' : ''}`} 
-                  id="floatingInput" 
-                  placeholder="9999999999" 
+              {touched.mobile && errors.mobile && (
+                  <div className="error-message-container">
+                    <div className="error-message">{errors.mobile}</div>
+                  </div>
+                )}
+              <div className="form-floating mb-4">
+                <Field
+                  type="text"
+                  name="mobile"
+                  className={`form-control ${touched.mobile && errors.mobile ? 'is-invalid' : ''}`}
+                  id="floatingInput"
+                  placeholder="9999999999"
                 />
                 <label htmlFor="floatingInput">Mobile</label>
+                
               </div>
-
-              <div className="form-floating mb-3">
-                <Field 
-                  type="password" 
-                  name="password" 
-                  className={`form-control ${touched.password && errors.password ? 'is-invalid' : ''}`} 
-                  id="floatingPassword" 
-                  placeholder="Password" 
+              {touched.password && errors.password && (
+                  <div className="error-message-container">
+                    <div className="error-message">{errors.password}</div>
+                  </div>
+                )}
+              <div className="form-floating mb-4">
+                <Field
+                  type="password"
+                  name="password"
+                  className={`form-control ${touched.password && errors.password ? 'is-invalid' : ''}`}
+                  id="floatingPassword"
+                  placeholder="Password"
                 />
                 <label htmlFor="floatingPassword">Password</label>
+                
               </div>
 
-              <div className="form-floating mb-3">
-                <Field 
-                  type="password" 
-                  name="confirmPassword" 
-                  className={`form-control ${touched.confirmPassword && errors.confirmPassword ? 'is-invalid' : ''}`} 
-                  id="floatingConfirmPassword" 
-                  placeholder="Confirm Password" 
+                {touched.confirmPassword && errors.confirmPassword && (
+                  <div className="error-message-container">
+                    <div className="error-message">{errors.confirmPassword}</div>
+                  </div>
+                )}
+              <div className="form-floating mb-4">
+                <Field
+                  type="password"
+                  name="confirmPassword"
+                  className={`form-control ${touched.confirmPassword && errors.confirmPassword ? 'is-invalid' : ''}`}
+                  id="floatingConfirmPassword"
+                  placeholder="Confirm Password"
                 />
                 <label htmlFor="floatingConfirmPassword">Confirm Password</label>
               </div>

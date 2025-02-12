@@ -50,13 +50,13 @@ const Login = () => {
           onSubmit={handleSubmit}
         >
           {({ touched, errors }) => (
-            <Form>
-              <div className="text-danger mb-3">
-                <ErrorMessage name="email" component="div" className="error-message" />
-                <ErrorMessage name="password" component="div" className="error-message" />
-              </div>
-              
-              <div className="form-floating mb-3">
+            <Form className="mt-3">
+              {touched.email && errors.email && (
+                  <div className="error-message-container">
+                    <div className="error-message">{errors.email}</div>
+                  </div>
+                )}
+              <div className="form-floating mb-4">
                 <Field
                   type="email"
                   name="email"
@@ -65,9 +65,14 @@ const Login = () => {
                   placeholder="name@example.com"
                 />
                 <label htmlFor="floatingInput">Email address</label>
+                
               </div>
-
-              <div className="form-floating mb-3">
+              {touched.password && errors.password && (
+                  <div className="error-message-container">
+                    <div className="error-message">{errors.password}</div>
+                  </div>
+                )}
+              <div className="form-floating mb-4">
                 <Field
                   type="password"
                   name="password"
@@ -76,6 +81,7 @@ const Login = () => {
                   placeholder="Password"
                 />
                 <label htmlFor="floatingPassword">Password</label>
+                
               </div>
 
               <button type="submit" className="btn btn-secondary">
