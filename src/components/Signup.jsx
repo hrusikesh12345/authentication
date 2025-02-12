@@ -1,5 +1,5 @@
-// Signup.js
 import React from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -24,27 +24,33 @@ const validationSchema = Yup.object({
 const Signup = () => {
   const navigate = useNavigate();
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     const { email, mobile, password } = values;
 
-    // Simulate signup request (replace with actual API call)
-    fetch("/api/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, mobile, password }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        toast.success("Signup successful!");
-        navigate("/login"); // redirect to login page after successful signup
-      })
-      .catch((error) => {
-        toast.error("Signup failed!");
+    try {
+      const response = await axios.post("http://localhost:8880/api/auth/signup", {
+        email,
+        mobile,
+        password,
       });
+  
+      if (response.status === 200 || response.status === 201) {
+        toast.success("Signup successful!");
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Signup Error:", error);
+  
+      if (error.response) {
+        toast.error(error.response.data.message || "Signup failed!");
+      } else {
+        toast.error("Signup failed! Please try again.");
+      }
+    }
   };
 
   return (
-    <div className="card w-75 mx-auto mt-5 shadow border-black border-1">
+    <div className="card w-50 w-md-75 mx-auto mt-5 shadow border-black border-1">
       <div className="card-head text-center rounded-top-1  p-3 text-light" style={{backgroundColor:'#172A3A'}}>
         <h2>Sign Up</h2>
       </div>

@@ -1,41 +1,49 @@
-
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
-        <nav class="navbar" style={{ backgroundColor: '#172A3A' }}>
-            <div class="container-fluid">
-                <a class="navbar-brand text-light fw-bold fs-2">Authenticator</a>
-                <form class="d-flex" >
-                    <ul
-                        style={{
-                            listStyle: 'none',
-                            display: 'flex',
-                            gap: '20px',
-                            margin: '0',
-                        }}
-                    >
-                        <li>
-                            <Link
+        <nav className="navbar navbar-expand-lg" style={{ backgroundColor: '#172A3A' }}>
+            <div className="container-fluid">
+                <a className="navbar-brand text-light fw-bold fs-2">Authenticator</a>
+
+                <button 
+                    className="navbar-toggler border-light"
+                    type="button"
+                    onClick={() => setIsOpen(!isOpen)}
+                >
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+
+                <div className={`collapse navbar-collapse ${isOpen ? 'show' : ''}`}>
+                    <ul className="navbar-nav ms-auto d-flex gap-3">
+                        <li className="nav-item">
+                            <NavLink
                                 to="/login"
-                                className='btn btn-secondary px-4'
+                                className={({ isActive }) =>
+                                    `nav-link px-4 text-white ${isActive ? 'bg-success' : 'bg-secondary'} btn`
+                                }
+                                style={{ borderRadius: '10px' }}
                             >
                                 Login
-                            </Link>
+                            </NavLink>
                         </li>
-                        <li>
-                            <Link
+                        <li className="nav-item">
+                            <NavLink
                                 to="/signup"
-                                className='btn btn-secondary px-3'
+                                className={({ isActive }) =>
+                                    `nav-link px-3 text-white ${isActive ? 'bg-success' : 'bg-secondary'} btn`
+                                }
+                                style={{ borderRadius: '10px' }}
                             >
                                 Sign Up
-                            </Link>
+                            </NavLink>
                         </li>
                     </ul>
-                </form>
+                </div>
             </div>
-
         </nav>
     );
 };
