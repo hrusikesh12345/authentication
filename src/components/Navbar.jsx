@@ -14,7 +14,7 @@ const Navbar = () => {
                     type="button"
                     onClick={() => setIsOpen(!isOpen)}
                 >
-                    <span className="navbar-toggler-icon"></span>
+                    <span className="text-light fs-3">&#9776;</span>
                 </button>
 
                 <div className={`collapse navbar-collapse ${isOpen ? 'show' : ''}`}>
