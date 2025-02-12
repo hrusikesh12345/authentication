@@ -82,7 +82,7 @@ const Signup = () => {
               <Field type="password" name="confirmPassword" className="form-control" />
             </div>
 
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-secondary">
               Sign Up
             </button>
           </Form>

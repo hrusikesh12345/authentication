@@ -61,7 +61,7 @@ const Login = () => {
               <label>Password</label>
               <Field type="password" name="password" className="form-control" />
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-secondary">
               Login
             </button>
           </Form>
