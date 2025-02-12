@@ -26,7 +26,6 @@ const Login = () => {
   
       if (response.status === 200) {
         toast.success("Login successful!");
-        
       }
     } catch (error) {
       console.error("Login Error:", error);
@@ -40,7 +39,7 @@ const Login = () => {
   };
 
   return (
-    <div className="card w-50 w-md-75 mt-5 mx-auto border-black border-1 shadow">
+    <div className="card col-sm-9 col-lg-6 mt-5 mx-auto border-black border-1 shadow">
       <div className="card-head text-center p-3 rounded-top-1 text-light" style={{backgroundColor:'#172A3A'}}>
         <h2>Login</h2>
       </div>
@@ -50,23 +49,40 @@ const Login = () => {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          <Form>
-            <div className="text-danger mb-3">
-              <ErrorMessage name="email" component="div" className="error-message" />
-              <ErrorMessage name="password" component="div" className="error-message" />
-            </div>
-            <div className="form-group mb-3">
-              <label>Email</label>
-              <Field type="email" name="email" className="form-control" />
-            </div>
-            <div className="form-group mb-3">
-              <label>Password</label>
-              <Field type="password" name="password" className="form-control" />
-            </div>
-            <button type="submit" className="btn btn-secondary">
-              Login
-            </button>
-          </Form>
+          {({ touched, errors }) => (
+            <Form>
+              <div className="text-danger mb-3">
+                <ErrorMessage name="email" component="div" className="error-message" />
+                <ErrorMessage name="password" component="div" className="error-message" />
+              </div>
+              
+              <div className="form-floating mb-3">
+                <Field
+                  type="email"
+                  name="email"
+                  className={`form-control ${touched.email && errors.email ? 'is-invalid' : ''}`}
+                  id="floatingInput"
+                  placeholder="name@example.com"
+                />
+                <label htmlFor="floatingInput">Email address</label>
+              </div>
+
+              <div className="form-floating mb-3">
+                <Field
+                  type="password"
+                  name="password"
+                  className={`form-control ${touched.password && errors.password ? 'is-invalid' : ''}`}
+                  id="floatingPassword"
+                  placeholder="Password"
+                />
+                <label htmlFor="floatingPassword">Password</label>
+              </div>
+
+              <button type="submit" className="btn btn-secondary">
+                Login
+              </button>
+            </Form>
+          )}
         </Formik>
       </div>
     </div>

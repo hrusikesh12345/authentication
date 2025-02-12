@@ -50,7 +50,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="card w-50 w-md-75 mx-auto mt-5 shadow border-black border-1">
+    <div className="card col-sm-9 col-lg-6 mx-auto mt-5 shadow border-black border-1">
       <div className="card-head text-center rounded-top-1  p-3 text-light" style={{backgroundColor:'#172A3A'}}>
         <h2>Sign Up</h2>
       </div>
@@ -60,38 +60,64 @@ const Signup = () => {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          <Form>
-            <div className="text-danger mb-2">
-              <ErrorMessage name="email" component="div" className="error-message" />
-              <ErrorMessage name="mobile" component="div" className="error-message" />
-              <ErrorMessage name="password" component="div" className="error-message" />
-              <ErrorMessage name="confirmPassword" component="div" className="error-message" />
-            </div>
+          {({ touched, errors }) => (
+            <Form>
+              <div className="text-danger mb-2">
+                <ErrorMessage name="email" component="div" className="error-message" />
+                <ErrorMessage name="mobile" component="div" className="error-message" />
+                <ErrorMessage name="password" component="div" className="error-message" />
+                <ErrorMessage name="confirmPassword" component="div" className="error-message" />
+              </div>
 
-            <div className="form-group mb-3">
-              <label>Email</label>
-              <Field type="email" name="email" className="form-control" />
-            </div>
+              <div className="form-floating mb-3">
+                <Field 
+                  type="email" 
+                  name="email" 
+                  className={`form-control ${touched.email && errors.email ? 'is-invalid' : ''}`} 
+                  id="floatingInput" 
+                  placeholder="name@example.com" 
+                />
+                <label htmlFor="floatingInput">Email address</label>
+              </div>
 
-            <div className="form-group mb-3">
-              <label>Mobile Number</label>
-              <Field type="text" name="mobile" className="form-control" />
-            </div>
+              <div className="form-floating mb-3">
+                <Field 
+                  type="text" 
+                  name="mobile" 
+                  className={`form-control ${touched.mobile && errors.mobile ? 'is-invalid' : ''}`} 
+                  id="floatingInput" 
+                  placeholder="9999999999" 
+                />
+                <label htmlFor="floatingInput">Mobile</label>
+              </div>
 
-            <div className="form-group mb-3">
-              <label>Password</label>
-              <Field type="password" name="password" className="form-control" />
-            </div>
+              <div className="form-floating mb-3">
+                <Field 
+                  type="password" 
+                  name="password" 
+                  className={`form-control ${touched.password && errors.password ? 'is-invalid' : ''}`} 
+                  id="floatingPassword" 
+                  placeholder="Password" 
+                />
+                <label htmlFor="floatingPassword">Password</label>
+              </div>
 
-            <div className="form-group mb-3">
-              <label>Confirm Password</label>
-              <Field type="password" name="confirmPassword" className="form-control" />
-            </div>
+              <div className="form-floating mb-3">
+                <Field 
+                  type="password" 
+                  name="confirmPassword" 
+                  className={`form-control ${touched.confirmPassword && errors.confirmPassword ? 'is-invalid' : ''}`} 
+                  id="floatingConfirmPassword" 
+                  placeholder="Confirm Password" 
+                />
+                <label htmlFor="floatingConfirmPassword">Confirm Password</label>
+              </div>
 
-            <button type="submit" className="btn btn-secondary">
-              Sign Up
-            </button>
-          </Form>
+              <button type="submit" className="btn btn-secondary">
+                Sign Up
+              </button>
+            </Form>
+          )}
         </Formik>
       </div>
     </div>
