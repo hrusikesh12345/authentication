@@ -17,26 +17,41 @@ const Login = () => {
 
   const handleSubmit = async (values) => {
     const { email, password } = values;
-    
+  
     try {
-      const response = await axios.post("http://localhost:8880/api/auth/login", {
+      const response = await axios.post("http://localhost:8085/api/v1/user/login", {
         email,
         password,
       });
   
       if (response.status === 200) {
-        toast.success("Login successful!");
+        const { message, success } = response.data;
+        
+        if (success) {
+          toast.success("Login Success");
+        } else {
+          toast.error(message || "Login Failed");
+        }
       }
     } catch (error) {
       console.error("Login Error:", error);
   
       if (error.response) {
-        toast.error(error.response.data.message || "Login failed!");
+        const message = error.response.data.message;
+  
+        if (message === "Email not exists") {
+          toast.error("Email not exists");
+        } else if (message === "password Not Match") {
+          toast.error("Password does not match");
+        } else {
+          toast.error(message || "Login failed");
+        }
       } else {
         toast.error("Login failed! Please try again.");
       }
     }
   };
+  
 
   return (
     <div className="card col-sm-9 col-lg-6 mt-5 mx-auto border-black border-1 shadow">
@@ -51,11 +66,14 @@ const Login = () => {
         >
           {({ touched, errors }) => (
             <Form className="mt-3">
+              <div className="d-flex justify-content-end">
+                
               {touched.email && errors.email && (
-                  <div className="error-message-container">
+                <div className="error-message-container">
                     <div className="error-message">{errors.email}</div>
                   </div>
                 )}
+                </div>
               <div className="form-floating mb-4">
                 <Field
                   type="email"
@@ -67,11 +85,14 @@ const Login = () => {
                 <label htmlFor="floatingInput">Email address</label>
                 
               </div>
+              <div className="d-flex justify-content-end">
+                
               {touched.password && errors.password && (
-                  <div className="error-message-container">
+                <div className="error-message-container">
                     <div className="error-message">{errors.password}</div>
                   </div>
                 )}
+                </div>
               <div className="form-floating mb-4">
                 <Field
                   type="password"

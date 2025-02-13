@@ -25,24 +25,29 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (values) => {
-    const { email, mobile, password } = values;
-
+    const { email, password } = values;
+  
     try {
-      const response = await axios.post("http://localhost:8880/api/auth/signup", {
+      const response = await axios.post("http://localhost:8085/api/v1/user/save", {
         email,
-        mobile,
         password,
       });
-
+  
       if (response.status === 200 || response.status === 201) {
         toast.success("Signup successful!");
         navigate("/login");
       }
     } catch (error) {
       console.error("Signup Error:", error);
-
+  
       if (error.response) {
-        toast.error(error.response.data.message || "Signup failed!");
+        const message = error.response.data.message;
+  
+        if (message === "Email already exists!") {
+          toast.error("Email already exists!");
+        } else {
+          toast.error(message || "Signup failed!");
+        }
       } else {
         toast.error("Signup failed! Please try again.");
       }
@@ -62,11 +67,13 @@ const Signup = () => {
         >
           {({ touched, errors }) => (
             <Form>
+              <div className="d-flex justify-content-end">
               {touched.email && errors.email && (
                   <div className="error-message-container">
                     <div className="error-message">{errors.email}</div>
                   </div>
                 )}
+              </div>
               <div className="form-floating mb-4">
                 <Field
                   type="email"
@@ -78,11 +85,14 @@ const Signup = () => {
                 <label htmlFor="floatingInput">Email address</label>
                 
               </div>
+              <div className="d-flex justify-content-end">
+
               {touched.mobile && errors.mobile && (
-                  <div className="error-message-container">
+                <div className="error-message-container">
                     <div className="error-message">{errors.mobile}</div>
                   </div>
                 )}
+                </div>
               <div className="form-floating mb-4">
                 <Field
                   type="text"
@@ -94,11 +104,14 @@ const Signup = () => {
                 <label htmlFor="floatingInput">Mobile</label>
                 
               </div>
+              <div className="d-flex justify-content-end">
+                
               {touched.password && errors.password && (
-                  <div className="error-message-container">
+                <div className="error-message-container">
                     <div className="error-message">{errors.password}</div>
                   </div>
                 )}
+                </div>
               <div className="form-floating mb-4">
                 <Field
                   type="password"
@@ -110,12 +123,14 @@ const Signup = () => {
                 <label htmlFor="floatingPassword">Password</label>
                 
               </div>
-
+              <div className="d-flex justify-content-end">
+                
                 {touched.confirmPassword && errors.confirmPassword && (
                   <div className="error-message-container">
                     <div className="error-message">{errors.confirmPassword}</div>
                   </div>
                 )}
+                </div>
               <div className="form-floating mb-4">
                 <Field
                   type="password"
