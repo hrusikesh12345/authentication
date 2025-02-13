@@ -8,37 +8,35 @@
     <title>Vite + React</title>
     <style>
       .error-message-container {
-        position: relative; /* To allow positioning of the error message relative to the field */
-        margin-bottom: 10px; /* Adjust margin so that there is space between error and field */
+        position: relative; 
+        margin-bottom: 10px; 
       }
 
-      /* Error message styling */
       .error-message {
-        background-color: #f8d7da; /* Light red background */
-        color: #721c24;            /* Dark red text */
-        border: 1px solid #f5c6cb; /* Light red border */
-        padding: 10px 15px;         /* Padding around the message */
-        font-weight: bold;          /* Make the text bold */
-        font-size: 0.9rem;          /* Slightly smaller font size */
-        border-radius: 5px;         /* Rounded corners */
-        position: absolute;         /* Absolute positioning */
-        bottom: 100%;               /* Position above the input field */
-        left: 0;                    /* Align it to the left of the field */
-        transform: translateX(0);   /* Don't center it, keep it left-aligned */
-        z-index: 10;                /* Ensure the error message is above */
-        margin-bottom: 5px;         /* Space between error and input */
+        background-color: #f8d7da; 
+        color: #721c24;            
+        border: 1px solid #f5c6cb; 
+        padding: 10px 15px;         
+        font-weight: bold;          
+        font-size: 0.9rem;          
+        border-radius: 5px;         
+        position: absolute;         
+        bottom: 100%;               
+        left: 0;                    
+        transform: translateX(0);   
+        z-index: 10;                
+        margin-bottom: 5px;         
       }
 
-      /* Triangle pointer to point to the field */
       .error-message:after {
         content: "";
         position: absolute;
-        top: 100%; /* Position the triangle at the bottom of the error message */
-        left: 15px; /* Position the triangle closer to the left of the input */
-        transform: translateX(-50%); /* Center the triangle */
+        top: 100%; 
+        left: 15px; 
+        transform: translateX(-50%); 
         border-left: 6px solid transparent;
         border-right: 6px solid transparent;
-        border-top: 8px solid #f8d7da; /* Create a triangle with the same color as the error message */
+        border-top: 8px solid #f8d7da;
       }
 
 
