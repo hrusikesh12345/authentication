@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 
@@ -16,41 +16,43 @@ const validationSchema = Yup.object({
 const Login = () => {
 
   const handleSubmit = async (values) => {
-    const { email, password } = values;
+  const { email, password } = values;
   
-    try {
-      const response = await axios.post("http://localhost:8085/api/v1/user/login", {
-        email,
-        password,
-      });
-  
-      if (response.status === 200) {
-        const { message, success } = response.data;
-        
-        if (success) {
-          toast.success("Login Success");
-        } else {
-          toast.error(message || "Login Failed");
-        }
-      }
-    } catch (error) {
-      console.error("Login Error:", error);
-  
-      if (error.response) {
-        const message = error.response.data.message;
-  
-        if (message === "Email not exists") {
-          toast.error("Email not exists");
-        } else if (message === "password Not Match") {
-          toast.error("Password does not match");
-        } else {
-          toast.error(message || "Login failed");
-        }
+  try {
+    const response = await axios.post("http://localhost:8085/api/v1/user/login", {
+      email,
+      password,
+    });
+    
+    if (response.status === 200) {
+      const { message, succes } = response.data;
+      console.log("Backend Response:", succes,message);
+      
+      if (message==="Login Success") {
+        toast.success("Login Successful");
       } else {
-        toast.error("Login failed! Please try again.");
+        toast.error(message || "Login Failed");
       }
     }
-  };
+  } catch (error) {
+    console.error("Login Error:", error);
+
+    if (error.response) {
+      const message = error.response.data.message;
+
+      if (message === "Email not exists") {
+        toast.error("Email not exists");
+      } else if (message === "Password Not Match") {
+        toast.error("Password does not match");
+      } else {
+        toast.error(message || "Login failed");
+      }
+    } else {
+      toast.error("Login failed! Please try again.");
+    }
+  }
+};
+
   
 
   return (
